@@ -1,3 +1,12 @@
 %h1 Select branch
-= select_tag "people", options_for_select(@branches)
-= link_to 'Deploy', '#'
+= select_tag "branches", options_for_select(@branches), class: 'form-control'
+%br
+= link_to 'Deploy', 'javascript:void(0)', class: 'btn btn-primary', id: 'deploy_btn'
+
+:javascript
+  $(document).ready(function(){
+    $('#deploy_btn').click(function(){
+      $.post("deploy/deploy_branch?branch=" + $('#branches').val());
+      alert('check it out in 5-10 minutes');
+    });
+  });
